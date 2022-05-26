@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
@@ -7,10 +7,13 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
   templateUrl: './grafico-barra-horizontal.component.html',
   styleUrls: ['./grafico-barra-horizontal.component.css']
 })
-export class GraficoBarraHorizontalComponent implements OnInit {
-  resultados: any[] = [];
-
-  view: [number, number] = [700, 400];
+export class GraficoBarraHorizontalComponent implements OnDestroy {
+  resultados: any[] = [
+    { name: 'Batman', value: 10 },
+    { name: 'FIFA', value: 20 },
+    { name: 'KOF', value: 30 },
+    { name: 'Mortal Kombat', value: 25 },
+  ];
 
   // options
   showXAxis = true;
@@ -24,14 +27,30 @@ export class GraficoBarraHorizontalComponent implements OnInit {
 
   colorScheme = 'nightLights';
 
+  intervalo: any;
+
   constructor() {
+    
+    this.intervalo = setInterval(() => {
+      console.log('Tick');
+      
+      const newResult = [... this.resultados];
+
+      for (let i = 0; i < this.resultados.length; i++) {
+        newResult[i].value = Math.floor(Math.random() * 100) + 1;
+      }
+
+      this.resultados = [... newResult];
+    }, 1500);
   }
 
-  ngOnInit() {
+  ngOnDestroy(): void {
+    clearInterval(this.intervalo);
   }
 
   onSelect(event: any) {
     console.log(event);
   }
+  
 
 }
