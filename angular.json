@@ -101,6 +101,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "goty:build:production",
+            "firebaseProject": "goty-485c9",
+            "firebaseHostingSite": "goty-485c9"
+          }
         }
       }
     }

@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "goty-485c9"
+  },
+  "targets": {
+    "goty-485c9": {
+      "hosting": {
+        "goty": [
+          "goty-485c9"
+        ]
+      }
+    }
+  }
+}
