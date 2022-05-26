@@ -2,10 +2,14 @@ import { Component, OnDestroy } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
+// Services
+import { FirebaseService } from '../../common/services/firebase.service';
+
 @Component({
   selector: 'app-grafico-barra-horizontal',
   templateUrl: './grafico-barra-horizontal.component.html',
-  styleUrls: ['./grafico-barra-horizontal.component.css']
+  styleUrls: ['./grafico-barra-horizontal.component.css'],
+  providers: [FirebaseService]
 })
 export class GraficoBarraHorizontalComponent implements OnDestroy {
   resultados: any[] = [
@@ -29,7 +33,7 @@ export class GraficoBarraHorizontalComponent implements OnDestroy {
 
   intervalo: any;
 
-  constructor() {
+  constructor(private fireService: FirebaseService) {
     
     this.intervalo = setInterval(() => {
       console.log('Tick');
@@ -42,6 +46,12 @@ export class GraficoBarraHorizontalComponent implements OnDestroy {
 
       this.resultados = [... newResult];
     }, 1500);
+
+    // Recuperar los resultados de la base de datos
+    this.fireService.getGames().subscribe( (games: any[]) => {
+      console.log('Games:', games);
+      // this.resultados = games;
+    });
   }
 
   ngOnDestroy(): void {
