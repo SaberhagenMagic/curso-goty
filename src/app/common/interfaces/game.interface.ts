@@ -1,6 +1,6 @@
 export interface Game {
-    id: string;
-    name: string;
-    votos: number;
-    url: string;
+    id      : string;
+    name    : string;
+    votos   : number;
+    url     : string;
 }

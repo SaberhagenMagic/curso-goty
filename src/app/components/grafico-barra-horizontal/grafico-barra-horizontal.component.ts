@@ -1,6 +1,7 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { Game } from 'src/app/common/interfaces/game.interface';
 
 // Services
 import { FirebaseService } from '../../common/services/firebase.service';
@@ -12,12 +13,13 @@ import { FirebaseService } from '../../common/services/firebase.service';
   providers: [FirebaseService]
 })
 export class GraficoBarraHorizontalComponent implements OnDestroy {
-  resultados: any[] = [
-    { name: 'Batman', value: 10 },
-    { name: 'FIFA', value: 20 },
-    { name: 'KOF', value: 30 },
-    { name: 'Mortal Kombat', value: 25 },
-  ];
+  @Input() Juegos: { name: string, value: number }[] = [];
+  // resultados: any[] = [
+  //   { name: 'Batman', value: 10 },
+  //   { name: 'FIFA', value: 20 },
+  //   { name: 'KOF', value: 30 },
+  //   { name: 'Mortal Kombat', value: 25 },
+  // ];
 
   // options
   showXAxis = true;
@@ -33,25 +35,20 @@ export class GraficoBarraHorizontalComponent implements OnDestroy {
 
   intervalo: any;
 
-  constructor(private fireService: FirebaseService) {
+  constructor() {
     
-    this.intervalo = setInterval(() => {
-      console.log('Tick');
+    // this.intervalo = setInterval(() => {
+    //   console.log('Tick');
       
-      const newResult = [... this.resultados];
+    //   const newResult = [... this.Juegos];
 
-      for (let i = 0; i < this.resultados.length; i++) {
-        newResult[i].value = Math.floor(Math.random() * 100) + 1;
-      }
+    //   for (let i = 0; i < this.Juegos.length; i++) {
+    //     newResult[i].value = Math.floor(Math.random() * 100) + 1;
+    //   }
 
-      this.resultados = [... newResult];
-    }, 1500);
+    //   this.Juegos = [... newResult];
+    // }, 1500);
 
-    // Recuperar los resultados de la base de datos
-    this.fireService.getGames().subscribe( (games: any[]) => {
-      console.log('Games:', games);
-      // this.resultados = games;
-    });
   }
 
   ngOnDestroy(): void {
