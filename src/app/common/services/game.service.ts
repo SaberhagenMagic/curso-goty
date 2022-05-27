@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
+import Swal from 'sweetalert2';
 import { Game } from '../interfaces/game.interface';
 import { FirebaseService } from './firebase.service';
 
@@ -28,9 +29,15 @@ export class GameService {
     }
   }
 
-  async votarJuego(game: Game) {
-    const response =  await this.fireService.editGame(game);
-    console.log(response);
-    // return response;
+  votarJuego(game: Game): void {
+    this.fireService.editGame(game)
+    .then(() => {
+      // console.log('Voto guardado');
+      Swal.fire('Gracias', 'Tu voto ha sido contabilizado', 'success');
+    })
+    .catch((err) => {
+      console.error( err.message);
+      Swal.fire('Error', 'Error al guardar el voto', 'error');
+    });
   }
 }

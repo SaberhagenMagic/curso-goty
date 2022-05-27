@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { environment } from '../environments/environment';
 
@@ -23,7 +24,8 @@ import { GotyComponent } from './pages/goty/goty.component';
     AppRoutingModule,
     ComponentsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    SweetAlert2Module.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

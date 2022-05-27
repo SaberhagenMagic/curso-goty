@@ -13,7 +13,7 @@ export class GotyComponent implements OnInit {
 
   constructor(private gameSrv: GameService) {
     this.gameSrv.getNominations().subscribe(games => {
-      console.log(games);
+      // console.log(games);
       this.listGames = games;
     });
   }
@@ -22,7 +22,7 @@ export class GotyComponent implements OnInit {
   }
 
   votarJuego(game: Game) {
-    console.log(game);
+    // console.log(game);
     game.votos = game.votos + 1;
     this.gameSrv.votarJuego(game);
   }
